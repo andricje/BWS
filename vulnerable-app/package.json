@@ -1,0 +1,22 @@
+{
+  "name": "host-header-injection-vulnerable-app",
+  "version": "1.0.0",
+  "description": "Ranjiva web aplikacija za demonstraciju Host Header Injection (BVS projekat)",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "node --watch app.js",
+    "init-db": "node scripts/init-db.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "better-sqlite3": "^11.10.0",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "express-session": "^1.18.1",
+    "method-override": "^3.0.0"
+  }
+}
