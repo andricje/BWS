@@ -1,0 +1,17 @@
+<%- include('partials/header') %>
+
+<div class="card border-warning">
+  <div class="card-body">
+    <h2 class="h5">Preusmeravanje (ranjivo)</h2>
+    <p>Host zaglavlje: <code><%= host %></code></p>
+    <p>Ciljna adresa:</p>
+    <code class="d-block text-break mb-3"><%= target %></code>
+    <form method="post" action="/redirect">
+      <input type="hidden" name="path" value="<%= path %>">
+      <button class="btn btn-warning">Nastavi preusmeravanje</button>
+      <a href="/dashboard" class="btn btn-outline-secondary">Otkaži</a>
+    </form>
+  </div>
+</div>
+
+<%- include('partials/footer') %>

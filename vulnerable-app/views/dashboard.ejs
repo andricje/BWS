@@ -1,8 +1,48 @@
 <%- include('partials/header') %>
 
-<h1 class="h3 mb-3">Kontrolna tabla</h1>
-<p class="text-muted">
-  Prijavljeni ste kao <strong><%= currentUser.name %></strong> (<%= currentUser.email %>).
-</p>
+<h1 class="h3 mb-4">Kontrolna tabla</h1>
+
+<div class="row g-3">
+  <div class="col-md-6">
+    <div class="card h-100">
+      <div class="card-body">
+        <h2 class="h6 text-uppercase text-muted">Profil</h2>
+        <p class="mb-2"><%= currentUser.name %> (<%= currentUser.email %>)</p>
+        <a href="<%= profileUrl %>" class="btn btn-sm btn-outline-primary">Apsolutni profil URL</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card h-100 border-warning">
+      <div class="card-body">
+        <h2 class="h6 text-uppercase text-muted">Open redirect (ranjivo)</h2>
+        <form method="get" action="/redirect">
+          <div class="input-group input-group-sm">
+            <span class="input-group-text">path</span>
+            <input class="form-control" name="path" value="/dashboard">
+            <button class="btn btn-warning">Pregled</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card mt-3">
+  <div class="card-header">API – generisanje apsolutnog URL-a</div>
+  <div class="card-body">
+    <p class="small text-muted">GET <code>/api/absolute-url?path=/dashboard</code></p>
+    <button class="btn btn-secondary btn-sm" id="fetchUrl">Testiraj sa trenutnim Host</button>
+    <pre class="mt-2 p-2 bg-light small" id="apiResult">—</pre>
+  </div>
+</div>
+
+<script>
+  document.getElementById('fetchUrl')?.addEventListener('click', async () => {
+    const res = await fetch('/api/absolute-url?path=/dashboard');
+    const data = await res.json();
+    document.getElementById('apiResult').textContent = JSON.stringify(data, null, 2);
+  });
+</script>
 
 <%- include('partials/footer') %>

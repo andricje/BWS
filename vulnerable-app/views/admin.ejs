@@ -1,0 +1,53 @@
+<%- include('partials/header') %>
+
+<h1 class="h3 mb-4">Admin panel</h1>
+
+<h2 class="h5 mt-4">Korisnici</h2>
+<div class="table-responsive">
+  <table class="table table-sm table-striped">
+    <thead>
+      <tr><th>ID</th><th>Email</th><th>Ime</th><th>Uloga</th><th>Kreiran</th></tr>
+    </thead>
+    <tbody>
+      <% users.forEach(u => { %>
+        <tr>
+          <td><%= u.id %></td>
+          <td><%= u.email %></td>
+          <td><%= u.name %></td>
+          <td><span class="badge bg-<%= u.role === 'admin' ? 'danger' : 'secondary' %>"><%= u.role %></span></td>
+          <td class="small"><%= u.created_at %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<h2 class="h5 mt-4">Password reset tokeni</h2>
+<div class="table-responsive">
+  <table class="table table-sm">
+    <thead>
+      <tr><th>Email</th><th>Host</th><th>Link</th><th>Iskorišćen</th><th>Vreme</th></tr>
+    </thead>
+    <tbody>
+      <% tokens.forEach(t => { %>
+        <tr>
+          <td><%= t.email %></td>
+          <td class="font-monospace small"><%= t.host_used %></td>
+          <td class="small text-break"><a href="<%= t.reset_link %>"><%= t.reset_link %></a></td>
+          <td><%= t.used ? 'da' : 'ne' %></td>
+          <td class="small"><%= t.created_at %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<h2 class="h5 mt-4">Simulirani email-ovi</h2>
+<% emails.forEach(e => { %>
+  <div class="card mb-2">
+    <div class="card-header small">Za: <%= e.to_email %> · <%= e.created_at %></div>
+    <div class="card-body small font-monospace" style="white-space: pre-wrap;"><%= e.body %></div>
+  </div>
+<% }) %>
+
+<%- include('partials/footer') %>
