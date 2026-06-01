@@ -6,9 +6,14 @@
     <p class="lead text-muted">
       Demo bankarska aplikacija – Bezbednost web servisa (Host Header Injection projekat).
     </p>
-    <p class="text-muted mb-0">
-      Osnovni Express server, SQLite baza i Bootstrap interfejs.
-    </p>
+    <div class="d-flex flex-wrap gap-2">
+      <% if (!currentUser) { %>
+        <a href="/login" class="btn btn-primary btn-lg">Prijava</a>
+        <a href="/register" class="btn btn-outline-primary btn-lg">Registracija</a>
+      <% } else { %>
+        <a href="/dashboard" class="btn btn-primary btn-lg">Dashboard</a>
+      <% } %>
+    </div>
   </div>
 </div>
 

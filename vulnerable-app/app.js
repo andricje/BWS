@@ -5,6 +5,8 @@ const session = require('express-session');
 require('./db/database');
 
 const { attachUser } = require('./middleware/auth');
+const authRoutes = require('./routes/auth');
+const pagesRoutes = require('./routes/pages');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -30,9 +32,8 @@ app.use(
 
 app.use(attachUser);
 
-app.get('/', (req, res) => {
-  res.render('index', { title: 'SecureBank' });
-});
+app.use('/', pagesRoutes);
+app.use('/', authRoutes);
 
 app.use((req, res) => {
   res.status(404).render('error', {
@@ -43,4 +44,5 @@ app.use((req, res) => {
 
 app.listen(PORT, () => {
   console.log(`SecureBank http://localhost:${PORT}`);
+  console.log('Test nalozi: admin@bank.local / admin123 | marko@example.com / user123');
 });

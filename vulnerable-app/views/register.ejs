@@ -1,0 +1,28 @@
+<%- include('partials/header') %>
+
+<div class="row justify-content-center">
+  <div class="col-md-5">
+    <div class="card shadow-sm">
+      <div class="card-body p-4">
+        <h2 class="h4 mb-3">Registracija</h2>
+        <form method="post" action="/register">
+          <div class="mb-3">
+            <label class="form-label" for="name">Ime i prezime</label>
+            <input class="form-control" id="name" name="name" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="email">Email</label>
+            <input class="form-control" type="email" id="email" name="email" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="password">Lozinka</label>
+            <input class="form-control" type="password" id="password" name="password" minlength="6" required>
+          </div>
+          <button class="btn btn-primary w-100" type="submit">Kreiraj nalog</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('partials/footer') %>
