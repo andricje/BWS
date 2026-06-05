@@ -1,0 +1,4 @@
+vulnerable-app/node_modules
+vulnerable-app/data
+.git
+.idea
