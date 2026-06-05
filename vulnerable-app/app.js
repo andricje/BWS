@@ -6,6 +6,7 @@ const methodOverride = require('method-override');
 require('./db/database');
 
 const { attachUser } = require('./middleware/auth');
+const { validateHost } = require('./lib/host');
 const authRoutes = require('./routes/auth');
 const pagesRoutes = require('./routes/pages');
 const adminRoutes = require('./routes/admin');
@@ -15,7 +16,7 @@ const PORT = process.env.PORT || 3000;
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
-app.set('trust proxy', true);
+app.set('trust proxy', false);
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
@@ -35,6 +36,7 @@ app.use(
 );
 
 app.use(attachUser);
+app.use(validateHost);
 
 app.use((req, res, next) => {
   res.locals.requestHost = req.headers.host;
@@ -53,6 +55,5 @@ app.use((req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`SecureBank (ranjiva verzija) http://localhost:${PORT}`);
-  console.log('Test nalozi: admin@bank.local / admin123 | marko@example.com / user123');
+    console.log(`SecureBank (SIGURNA verzija) http://localhost:${PORT}`);  console.log('Test nalozi: admin@bank.local / admin123 | marko@example.com / user123');
 });

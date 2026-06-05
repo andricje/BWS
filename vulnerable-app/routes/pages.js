@@ -7,7 +7,7 @@ const router = express.Router();
 router.get('/', (req, res) => {
   res.render('index', {
     title: 'SecureBank',
-    baseUrl: getBaseUrl(req),
+    baseUrl: getBaseUrl(),
   });
 });
 
@@ -15,7 +15,7 @@ router.get('/dashboard', requireAuth, (req, res) => {
   res.render('dashboard', {
     title: 'Kontrolna tabla',
     profileUrl: buildAbsoluteUrl(req, `/profile/${req.session.userId}`),
-    baseUrl: getBaseUrl(req),
+    baseUrl: getBaseUrl(),
   });
 });
 
@@ -39,7 +39,7 @@ router.get('/redirect', (req, res) => {
     title: 'Preusmeravanje',
     target,
     path,
-    host: req.headers.host,
+    host: getBaseUrl(),
   });
 });
 
@@ -52,10 +52,9 @@ router.post('/redirect', (req, res) => {
 router.get('/api/absolute-url', (req, res) => {
   const path = req.query.path || '/';
   res.json({
-    host: req.headers.host,
+    host: getBaseUrl(),
     absoluteUrl: buildAbsoluteUrl(req, path),
-    warning: 'URL je generisan iz Host zaglavlja bez validacije (ranjivo).',
-  });
+    note: 'URL je generisan iz BASE_URL konfiguracije (sigurna verzija).',  });
 });
 
 module.exports = router;
